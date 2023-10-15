@@ -14,7 +14,7 @@ memory limit: 512 MiB
 name: steponnopets
 partial score: false
 samples:
-  - cases: [1, 2]
+  - cases: [1, 2, 3]
 time limit: 1.0
 title:
   zh-cn: 勿蹖宠物
@@ -22,4 +22,6 @@ type: program
 users: 
   chj:
     std: {expected: "== 100", path: "chj/std.cpp"}
+  psj:
+    std: {expected: "== 100", path: "psj/std.cpp"}
 version: 2
