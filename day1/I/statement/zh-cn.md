@@ -39,3 +39,14 @@ Ene 想知道这样做的方案数。认为两个方案不同，当且仅当各�
 {{ s('sample', 2) }}
 
 {{ self.sample_text() }}
+
+{{ self.title_sample_description() }}
+
+有以下两种方案：
+
+- `a` `a`
+- `aa`
+
+{{ s('sample', 3) }}
+
+{{ self.sample_text() }}
