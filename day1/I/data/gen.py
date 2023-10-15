@@ -246,30 +246,32 @@ for i in range(1, TASK_NUM + 1):
 	# pre_pre = precase.cnt
 	# add testcases below
 	
-	testcase.gen(L_LIMIT, genSingle)
+	# testcase.gen(L_LIMIT, genSingle)
+	testcase.skip()
 
 	for l in (15, 18):
 		for alphabet in (ATOZ, "ab"):
 			for with_fake in (False, 0.1, 0.7):
-				testcase.gen(l, genPalindromes, alphabet = alphabet, with_fake = with_fake)
+				# testcase.gen(l, genPalindromes, alphabet = alphabet, with_fake = with_fake)
+				testcase.skip()
 	
-	for l in (599, 600):
+	for l in (L_LIMIT - 1, L_LIMIT):
 		for alphabet in (ATOZ, "abcdefg"):
 			for j in range(2):
 				testcase.gen(l, genPairs, alphabet = alphabet)
 	
-	for l in (599, 600):
+	for l in (L_LIMIT - 1, L_LIMIT):
 		for alphabet in (ATOZ, "abcdefg"):
 			for j in range(2):
 				testcase.gen(l, genShrunk, alphabet = alphabet)
 
-	for l, pal_length in ((45, 45), (50, 50), (595, 17), (600, 24)):
+	for l, pal_length in ((45, 45), (50, 50), (999, 27), (1000, 20)):
 		for alphabet in (ATOZ, "abcdefg"):
 			for n in (50, 100, 120):
 				for j in range(2):
 					testcase.gen(l, genSlices, alphabet = alphabet, n = n, pal_length = pal_length)
 	
-	for l in (599, 600):
+	for l in (L_LIMIT - 1, L_LIMIT):
 		for min_length in (2, 4):
 			for j in range(2):
 				testcase.gen(l, genMajority_Minority, min_length = min_length)
