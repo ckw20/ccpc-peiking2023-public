@@ -24,5 +24,8 @@ users:
     std: {expected: "== 100", path: "chj/std.cpp"}
     uint: {expected: "== 100", path: "chj/uint.cpp"}
     block: {expected: "== 100", path: "chj/block.cpp"}
+  gyh:
+    std: {expected: "== 100", path: "gyh/std.cpp"}
+    brute: {expected: "== 0", path: "gyh/brute.cpp"}
       
 version: 2
