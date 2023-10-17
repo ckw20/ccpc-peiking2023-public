@@ -15,7 +15,7 @@ name: dna
 partial score: false
 samples:
   - cases: [1, 2]
-time limit: 3.0 # Expect > 2 * std, < 0.5 block
+time limit: 2.5 # Expect ~ 2 * std, < gyh/brute - 0.5s
 title:
   zh-cn: DNA 序列比较
 type: program
@@ -24,5 +24,8 @@ users:
     std: {expected: "== 100", path: "chj/std.cpp"}
     uint: {expected: "== 100", path: "chj/uint.cpp"}
     block: {expected: "== 100", path: "chj/block.cpp"}
+  gyh:
+    std: {expected: "== 100", path: "gyh/std.cpp"}
+    brute: {expected: "== 0", path: "gyh/brute.cpp"}
       
 version: 2
