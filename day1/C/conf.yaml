@@ -25,4 +25,8 @@ users:
     std:
       expected: "==100"
       path: "esc/std.cpp"
+  zyb:
+    std:
+      expected: "==100"
+      path: "zyb/std.cpp"
 version: 2
