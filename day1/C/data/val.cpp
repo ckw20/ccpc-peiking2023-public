@@ -25,7 +25,7 @@ void end_chk(){
 }
 int n,k,w,c[200],m[200],p[30];
 int main(){
-	int tot = 50;
+	int tot = 100;
 	//tot = read();
 	for(int tsd = 1;tsd <= tot;++tsd){
 		cerr<<tsd<<":"<<endl;
