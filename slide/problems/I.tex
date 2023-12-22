@@ -1,6 +1,116 @@
-\frame
-{
-    \frametitle{I 勿蹖宠物 {by \itshape SpiritualKhorosho}}
-	快写！
-}
+\documentclass[utf8,usenames,dvipsnames]{beamer}
+\usepackage{latexsym,amssymb,amsmath,amsbsy,amsopn,amstext,extarrows}
+\usepackage{hyperref,graphicx,wrapfig,fancybox}
+\usepackage{xeCJK,pgf}
+\usepackage{color,xcolor}
+\usepackage{ulem}%underline,sout
+\usepackage[thicklines]{cancel}%cancel
+\usepackage{bm}
+\usepackage{array,multicol,multirow}
+\usepackage{diagbox}
+\usepackage{geometry}
+\usepackage{xeCJKfntef}
 
+\usepackage{tikz}
+\usetikzlibrary{arrows, positioning, quotes}
+
+\author{陈鸿基 / SpiritualKhorosho}
+\title{I 勿蹖宠物}
+\institute{Tsinghua University}
+\usepackage{Tsinghua}
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\section{简要题意}
+
+\begin{frame}{简要题意}
+	
+	给定 $s_1, \cdots, s_N$，求满足以下条件的下标序列 $i_1, i_2, \cdots, i_k$（$k$ 为任意正整数）的数量，其中 $+$ 表示字符串的连接：
+	\begin{itemize}
+		\item $s_{i_1} + s_{i_2} + \cdots + s_{i_k}$ 是长度为 $L$ 的回文串。
+	\end{itemize}
+
+	保证 $1\le N\le 333$，$1\le L\le 1000$，$\sum_{i=1}^N \left|s_i\right| \le 600$。
+
+	\begin{block}{题目名称是什么意思？}
+		使用样例 3 给出的单词，可以还原出一个有名的英文回文句子，而题目名称是这个句子的中文翻译。除此之外，题目名称的第一个字和第四个字、第二个字和第三个字的拼音（不考虑声调）是相同的。
+	\end{block}
+
+\end{frame}
+
+\section{解法}
+
+\begin{frame}{分析}
+	
+	在做字符串匹配相关的题目时，有一类比较常见的策略是记当前匹配到了哪一位，并且这一位对应自动机中的哪个结点。
+
+	本题需要满足整个串是回文串，因此不好单向维护匹配情况。为了解决这个问题，我们不妨从两侧往内同时匹配：记 $f(i,\cdots)$ 表示当前处理到第 $i$ 位及第 $(L-i+1)$ 位，匹配情况为 $\cdots$ 时对应的方案数。\pause
+
+	通过 $f(i,\cdots)$ 转移到 $f(i+1,\cdots)$ 时，需要枚举下一个字母 $\alpha$，让第 $i$ 位对应的指向自动机 $q_l$ 结点的指针找对应 $\alpha$ 的正向转移的边，第 $(L-i+1)$ 位对应的指向自动机 $q_r$ 结点的指针找对应 $\alpha$ 的反向转移的边。正向转移可以使用 Trie 树简单维护，但是反向转移比较麻烦。\pause
+
+	注意到可以反向建立 Trie 树，这样就方便反向找了。
+
+\end{frame}
+
+\begin{frame}{正向 Trie 及反向 Trie}
+	
+	\begin{center}
+		\tikzstyle{vertex} = [circle, inner sep = 0pt, minimum size = 0.5cm, draw, fill = white, thick]
+		\tikzstyle{imagine} = [vertex, dashed]
+		\begin{tikzpicture}[every edge quotes/.style={pos = 0.35, fill = white, inner sep = 1pt, font = \footnotesize}, shorten >= 1pt, >=stealth']
+			\foreach \name/\x/\y/\d in {P0/0/0/, P1/1/1/, P2/1/-1/, P3/1/-2/, P4/2/2/, P5/2/0.5/, P6/2/-1/, P7/2/-2/, P8/3/2/double, P9/3/1/double, P10/3/0/, P11/3/-1/double, P12/3/-2/, P13/4/0/double, P14/4/-2/, P15/5/-2/double} {
+				\path node[vertex, \d] at (\x, \y) (\name) {};
+			}
+			\foreach \u/\v/\a in {P0/P1/e, P0/P2/l, P0/P3/o, P1/P4/e, P1/P5/v, P2/P6/e, P3/P7/l, P4/P8/l, P5/P9/e, P5/P10/i, P6/P11/e, P7/P12/i, P10/P13/l, P12/P14/v, P14/P15/e} {
+				\draw [->] (\u) edge ["\a"] (\v);
+			}
+
+			\foreach \name/\x/\y/\d in {Q0/10/0/, Q1/9/1/, Q2/9/-1.5/, Q3/8/2/, Q4/8/0.5/, Q5/8/-1/, Q6/8/-2/, Q7/7/2/double, Q8/7/1/double, Q9/7/0/, Q10/7/-1/double, Q11/7/-2/, Q12/6/0/, Q13/6/-2/double, Q14/5/0/double} {
+				\path node[vertex, \d] at (\x, \y) (\name) {};
+			}
+			\foreach \u/\v/\a in {Q0/Q1/e, Q0/Q2/l, Q1/Q3/e, Q1/Q4/v, Q2/Q5/e, Q2/Q6/i, Q3/Q7/l, Q4/Q8/e, Q4/Q9/i, Q5/Q10/e, Q6/Q11/v, Q9/Q12/l, Q11/Q13/e, Q12/Q14/o} {
+				\draw [->] (\u) edge ["\a"] (\v);
+			}
+			\draw[violet, dashed] (4.5, 3) -- (4.5, -0.25) -- (5.5, -1.75) -- (5.5, -3);
+		\end{tikzpicture}
+	\end{center}
+
+\end{frame}
+
+\begin{frame}{做法}
+	
+	记 $f\left(i,q_l, q_r\right)$ 表示当前处理到第 $i$ 位及第 $(L-i+1)$ 位，第 $i$ 位对应正向 Trie 树上的结点 $q_l$，第 $(L-i+1)$ 位对应反向 Trie 树上的结点 $q_r$。转移时枚举第 $(i+1)$ 位及第 $(L-i)$ 位的字母 $\alpha$，如果 $q_l$ 和 $q_r$ 均有 $\alpha$ 的转移边，则相应转移给 $f\left(i+1,q'_l,q'_r\right)$。
+
+	需要注意在 $i=L/2$ 处特判 $q_l$ 和 $q_r$ 能否合并：如果是奇数，则两个结点需要能通过同一个字母走到同一个单词的相同位置；如果是偶数，则有可能两边都恰好走到单词末尾，也有可能为同一个单词的相邻位置。
+
+	\begin{itemize}
+		\item stac\strong{k}/cats
+		\item step/o\strong{n}/\strong{n}o/pets
+		\item n\strong{oo}n
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}{做法}
+	
+	标程的处理方法是记 $f\left(i,q_l, q_r\right)$ 表示已知两侧分别匹配到 $q_l$ 及 $q_r$ 时，第 $i$ 至 $(L-i+1)$ 位的合法方案数。可以先根据单词表计算 $f\left(\left\lceil L/2\right\rceil, \cdot, \cdot\right)=0/1$，再根据 $f(i+1,\cdot,\cdot)$ 往外扩展计算 $f(i,\cdot,\cdot)$。直接用循环计算 DP 可以滚动数组，不用担心被卡空间。
+	\begin{itemize}
+		\item 当然，本题的空间限制最后开到了 1024MiB，只要不开两个 $500\times 600^2$ 的 int 数组都不会被卡。如果你想写记忆化搜索，用 char 记每个状态是否被访问过也是可以通过本题的。
+	\end{itemize}
+
+	复杂度看上去是 $O\left(L \left(\sum_{i=1}^N \left|s_i\right|\right)^2 |\Sigma|\right)$，但是实际上状态不会很满。比较优秀的写法是枚举 $q_l$ 及 $q_r$ 转移边，这样可以做到严格 $O\left(L \left(\sum_{i=1}^N \left|s_i\right|\right)^2\right)$，可以轻松通过本题。
+
+\end{frame}
+
+\begin{frame}{$N$ 的范围？}
+	
+	$$1\times 26 + 2 \times (333 - 26) = 640 > 600.$$
+
+	$$\frac{600-1\times 26}{2} = 287.$$
+
+\end{frame}
+
+\end{document}
