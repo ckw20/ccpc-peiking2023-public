@@ -1,0 +1,27 @@
+args:
+  n: 1000
+compile:
+  c: -O2 -std=c11
+  cpp: -O2 -std=c++14
+  java: ''
+  pas: -O2
+  py: ''
+data: 
+  - cases: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+    score: 100
+folder: problem
+memory limit: 512 MiB
+name: mincyc
+partial score: false
+samples: 
+  - cases: [1,2,3]
+time limit: 2.0
+title:
+  zh-cn: 最小环
+type: program
+users:
+  psj:
+    std: {expected: == 100, path: ./psj/std.cpp}
+  rsy:
+    std: {expected: == 100, path: ./rsy/ac.cpp}
+version: 2
