@@ -1,0 +1,40 @@
+\frame
+{
+  \frametitle{E 广播 {by \itshape Itst}}
+
+ 	称两个序列 $a_1,\dots,a_m$ 和 $b_1,\dots,b_n$ 是可广播的当且仅当以下条件成立:
+	\begin{itemize}
+	\item $\forall 0\le i\le \min(n,m)-1$，要么 $a_{m-i}=b_{n-i}$，要么 $\min(a_{m-i},b_{n-i})=1$.
+	\end{itemize}
+
+	给定两个正整数序列，你需要向两个序列中插入若干个 \texttt{1}，使得插入 \texttt{1} 的个数最少，同时插入完后两个序列是可广播的.
+
+	序列长度、值域 $\le 2000$.
+
+}
+\frame
+{
+  \frametitle{题解}
+
+ 	由于可广播需要匹配序列的两段后缀，考虑从后往前进行匹配的决策. 同时这个插入和匹配的过程跟编辑距离很像，于是考虑动态规划.
+
+	设动态规划状态 $f_{i,j}$  表示第一个序列已经匹配了 $i,\dots,m$、第二个序列已经匹配了 $j,\dots,n$ 时最少插入几个额外的 \texttt{1}.
+
+}
+
+\frame
+{
+  \frametitle{题解}
+
+	三种转移:
+	\begin{itemize}
+	\item $a_i$ 是新插入的 \texttt{1} 匹配的，从 $f_{i+1,j}+1$ 转移来;
+	\item $b_j$ 是新插入的 \texttt{1} 匹配的，从 $f_{i,j+1}+1$ 转移来;
+	\item $a_i$ 和 $b_j$ 本身可以匹配（$a_i=b_j$ 或 $\min(a_i,b_j)=1$），从 $f_{i+1,j+1}$ 转移来.
+	\end{itemize}
+
+	初始值为 $f_{m+1,n+1}=0$，最终答案为 $\min_{\min(i,j)=1} f_{i,j}$，这是由于根据可广播的定义，两个序列有一个匹配完了之后另外一个部分的剩下的前缀就不用匹配了.
+
+	复杂度 $O(nm)$.
+
+}

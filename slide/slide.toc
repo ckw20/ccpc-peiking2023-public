@@ -1,0 +1,15 @@
+\beamer@sectionintoc {1}{Part I (讲者 {\itshape liuzhangfeiabc})}{5}{0}{1}
+\beamer@subsectionintoc {1}{1}{K 报数 IV}{6}{0}{1}
+\beamer@subsectionintoc {1}{2}{F 最小环}{9}{0}{1}
+\beamer@subsectionintoc {1}{3}{I 勿蹖宠物}{11}{0}{1}
+\beamer@sectionintoc {2}{Part II (讲者 {\itshape Mys.C.K.})}{12}{0}{2}
+\beamer@subsectionintoc {2}{1}{A 游戏}{13}{0}{2}
+\beamer@subsectionintoc {2}{2}{B 替换}{26}{0}{2}
+\beamer@subsectionintoc {2}{3}{H 哈密顿}{35}{0}{2}
+\beamer@sectionintoc {3}{Part III (讲者 {\itshape E.Space})}{50}{0}{3}
+\beamer@subsectionintoc {3}{1}{E 广播}{51}{0}{3}
+\beamer@subsectionintoc {3}{2}{J 图}{54}{0}{3}
+\beamer@subsectionintoc {3}{3}{C 史莱姆工厂}{55}{0}{3}
+\beamer@sectionintoc {4}{Part IV (讲者 {\itshape JohnVictor})}{58}{0}{4}
+\beamer@subsectionintoc {4}{1}{G 【模板】线段树 1}{59}{0}{4}
+\beamer@subsectionintoc {4}{2}{D 三染色}{61}{0}{4}

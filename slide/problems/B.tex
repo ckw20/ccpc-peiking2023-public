@@ -1,0 +1,43 @@
+\frame
+{
+  \frametitle{B 替换 {by \itshape Itst}}
+
+	给定字符串 $s$，字符集为 \texttt{01}？. 对于每个 $1\le k\le |s|$，定义字符串 $t_k$ 为以下 \texttt{01} 字符串:
+	\begin{itemize}
+	\item 如果 $s_i$ 不是 ?，则 $t_{k,i}=s_i$.
+	\item 否则 $t_{k,i}=t_{k,i-k}$，你需要递归地求出 $t_{k,i-k}$；如果 $i-k$ 越界则为 \texttt{0}.
+	\end{itemize}
+
+	你需要输出每个 $t_k$ 中的 \texttt{1} 的数量.
+
+	$1\le |s|\le 10^5$.
+
+}
+
+\frame
+{
+  \frametitle{题解}
+
+	按照下标顺序得到字符串 $t_k$ 的每个字符，得到 $O(n^2)$ 做法. \pause
+
+	注意到字符集是 \texttt{01}，故考虑压位，每次求出 $t_k$ 的 $\omega=64$ 个字符. \pause
+
+	$k\le \omega$ 的情况暴力，$k\ge \omega$ 的情况 $t_{k,i}\dots t_{k,i+\omega}$ 依赖的字符为 $t_{k,i-k}\dots t_{k,i-k+\omega}$，这是提前求好的. 因此我们需要做以下操作得到这段字符: \pause
+
+	\begin{itemize}
+	\item 得到 $t_{k,i-k}\dots t_{k,i-k+\omega}$ 的二进制表示; \pause
+	\item 得到 $s_{k,i}\dots s_{k,i+\omega}$ 中 ? 的位置和 \texttt{1} 的位置的二进制表示. \pause
+	\item 对于 ? 的位置使用 $t_{k,i-k}\dots t_{k,i-k+\omega}$，对于非 ? 的位置使用 $s_{k,i}\dots s_{k,i+\omega}$，这容易在得到二进制表示后使用位运算实现.
+	\end{itemize}
+
+}
+
+\frame
+{
+  \frametitle{题解}
+
+	如果使用一个 long long 存储形如 $t_{k,j\omega}\dots t_{k,(j+1)\omega-1}$ 的一段字符，那么第一个部分只与两个 long long 有关; 如果每次我们取 $i$ 为 $\omega$ 的倍数，那么第二个部分可以直接预处理. \pause
+
+	这样得到复杂度为 $O\left(\frac{n^2}{\omega}\right)$ 的做法，应该可以通过.
+
+}

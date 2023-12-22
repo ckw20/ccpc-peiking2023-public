@@ -1,0 +1,108 @@
+\documentclass[dvipsnames]{ctexbeamer}
+
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{color, xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows, positioning}
+
+\usepackage{fourier}
+\usepackage{nicefrac}
+\usepackage{ulem}
+
+\usepackage[
+    type={CC},
+    modifier={by},
+    version={4.0},
+    % imagemodifier={-80x15},
+    lang={chinese-utf8},
+]{doclicense}
+
+% \usepackage[orientation=landscape,size=custom,width=16,height=9,scale=0.5,debug]{beamerposter}
+
+\newtheorem{remark}[theorem]{注记}
+
+\DeclareMathOperator{\mex}{mex}
+\newcommand{\me}{\mathrm{e}}
+
+\newcommand{\Dname}{三染色}
+\newcommand{\sfT}{\mathsf T}
+
+% \usetheme{Berkeley}
+\usetheme{metropolis}
+% \usecolortheme{spruce}
+\usefonttheme{professionalfonts,structurebold}
+
+\title{CCPC 北京 2023}
+% \subtitle{Selected Topics in Graph Enumeration {\color{red} (draft)}}
+\author{\textsc{E\textperiodcentered Space}, \textsc{gyh}, \textsc{Itst}, \textsc{JohnVictor}, \textsc{liuzhangfeiabc}, \textsc{SpiritualKhorosho}\textsuperscript{\textdagger}}
+\institute{清华大学学生算法协会}
+\date{2023 年 12 月 23 日}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\frame{
+    除命题人外, 感谢 ~\textsc{caeious}, \textsc{ix35}, \textsc{Mys.C.K.}, \textsc{rsy} 等人参与题目准备工作.
+
+    \textsuperscript{\textdagger} 按照字典顺序排列.
+}
+
+% \section[Outline]{}
+\frame[allowframebreaks]{
+    \tableofcontents[sections={1-2}]
+    \framebreak
+    \tableofcontents[sections={3-4}]
+}
+
+\section{Part I (讲者 {\itshape liuzhangfeiabc})}
+
+\subsection{K 报数 IV}
+\include{problems/K}
+
+\subsection{F 最小环}
+\include{problems/F}
+
+\subsection{I 勿蹖宠物}
+\include{problems/I}
+
+\section{Part II (讲者 {\itshape Mys.C.K.})}
+
+\subsection{A 游戏}
+\include{problems/A}
+
+\subsection{B 替换}
+\include{problems/B}
+
+\subsection{H 哈密顿}
+\include{problems/H}
+
+\section{Part III (讲者 {\itshape E.Space})}
+
+\subsection{E 广播}
+\include{problems/E}
+
+\subsection{J 图}
+\include{problems/J}
+
+\subsection{C 史莱姆工厂}
+\include{problems/C}
+
+\section{Part IV (讲者 {\itshape JohnVictor})}
+
+\subsection{G 【模板】线段树 1}
+\include{problems/G}
+
+\subsection{D 三染色}
+\include{problems/D}
+
+
+\begin{frame}{}
+    \begin{center}
+        \Large 感谢倾听!
+    \end{center}
+\end{frame}
+
+\end{document}

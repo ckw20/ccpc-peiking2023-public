@@ -1,0 +1,17 @@
+\begin{frame}{G 【模板】线段树 1 {by \itshape JohnVictor}}
+
+	写一个简要题意.
+
+\end{frame}
+
+\begin{frame}{题解}
+
+	考虑线段树，每个节点维护多项式 $\prod(x+a_i)\bmod x^{20}$. 
+
+	对于平移操作，只用将 $x$ 换为 $x+\Delta_x$ 并代入，复杂度为 $O(20^2)$。正确性是因为在 $x$ 保证偶数并且答案 $\bmod 2^{20}$ 的意义下，多项式 $\bmod x^{20}$ 并不影响结果.
+
+	对于求乘积操作，只用返回常数项.
+
+	总复杂度 $O(20^2 n\log n)$.
+
+\end{frame}

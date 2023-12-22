@@ -1,0 +1,171 @@
+\frame
+{
+    \frametitle{D {\Dname} {by \itshape JohnVictor}}
+
+    回顾题意: 有一种填了 $\mathbb Z_3$ 颜色的 $n\times m$ 网格.
+
+    称一次演化为: 对于一个颜色为 $c$ 的格子, 如果有颜色为 $c-1$ 的相邻格子,
+    那么在下一轮这个格子的颜色变成 $c-1$, 否则不变.
+
+    称一个染色方案是 \textbf{好的}, 当且仅当在有限次演化之后所有格子颜色相同.
+
+    对于一个好的染色方案, 称它的权值为最小的正整数 $t$, 满足网格演化 $t$ 次后, 左上角
+    格子颜色再也不变.
+
+    网格上有些格子已经确定颜色, 有些没有, 求好的染色方案数, 以及它们的权值和.
+
+    $2\leq n\leq 5, 2\leq m\leq 50$.
+}
+
+\frame
+{
+    \frametitle{题解}
+
+    注意到
+    \[ \begin{bmatrix}
+        0 & 1\\
+        2 & 2
+    \end{bmatrix} \mapsto \begin{bmatrix}
+        2 & 0\\
+        1/2 & 1
+    \end{bmatrix}, \]
+    可知形如这种矩阵 (或其翻转旋转, 整体加一个数) 一定会转移到自己.
+
+    \pause
+
+    我们称这种结构 \textbf{阻塞} 了一个网格成为好的.
+
+    \pause
+
+    \textbf{断言}: 不存在阻塞的网格都是好的.
+}
+
+\frame
+{
+    \frametitle{题解}
+
+    现在已知网格 $C\in \mathbb Z_3^{n\times m}$, 它的所有 $2\times 2$ 子网格, 都不是阻塞结构.
+
+    我们一定可以找到一种给每个格子赋予一个 {\textbf{整数}} 的方案 $F\in \mathbb Z^{n\times m}$,
+    使得:
+    \begin{itemize}
+        \item $C_{ij} = F_{ij} \bmod 3$.
+        \item $F$ 的相邻两项差不超过 $1$.
+    \end{itemize}
+}
+
+\frame
+{
+    \frametitle{题解}
+
+    \[ \Huge {C = \begin{bmatrix}
+        0 & 0 & 2\\
+        1 & 0 & 0\\
+        1 & 1 & 0
+    \end{bmatrix}, F = \begin{bmatrix}
+        0 & \onslide<2->{0} & \onslide<3->{-1} \\
+        \onslide<4->{1} & \onslide<4->{0} & \onslide<4->{0} \\
+        \onslide<5->{1} & \onslide<5->{1} & \onslide<5->{0}
+    \end{bmatrix}} \]
+
+    \onslide<3->{$F_{ij} \in F_{i(j-1)} + \{-1, 0, 1\}$ 保证 $F$ 被唯一确定.}
+
+    \onslide<5->{没有阻塞结构, 保证 $F$ 合法 (保证不用于生成 $F$ 的那部分约束被满足).}
+}
+
+
+\frame
+{
+    \frametitle{题解}
+
+    \only<1>{
+        \[ \Huge {C = \begin{bmatrix}
+            0 & 0 & 2\\
+            1 & 0 & 0\\
+            1 & 1 & 0
+        \end{bmatrix}, F = \begin{bmatrix}
+            0 & 0 & -1\\
+            1 & 0 & 0\\
+            1 & 1 & 0
+        \end{bmatrix}} \]
+    }
+
+    \only<2>{
+        \[ \Huge {C = \begin{bmatrix}
+            0 & 2 & 2\\
+            0 & 0 & 2\\
+            1 & 0 & 0
+        \end{bmatrix}, F = \begin{bmatrix}
+            0 & -1 & -1\\
+            0 & 0 & -1\\
+            1 & 0 & 0
+        \end{bmatrix}} \]
+    }
+
+    \only<3>{
+        \[ \Huge {C = \begin{bmatrix}
+            2 & 2 & 2\\
+            0 & 2 & 2\\
+            0 & 0 & 2
+        \end{bmatrix}, F = \begin{bmatrix}
+            -1 & -1 & -1\\
+            0 & -1 & -1\\
+            0 & 0 & -1
+        \end{bmatrix}} \]
+    }
+
+    \only<4>{
+        \[ \Huge {C = \begin{bmatrix}
+            2 & 2 & 2\\
+            2 & 2 & 2\\
+            0 & 2 & 2
+        \end{bmatrix}, F = \begin{bmatrix}
+            -1 & -1 & -1\\
+            -1 & -1 & -1\\
+            0 & -1 & -1
+        \end{bmatrix}} \]
+    }
+    \only<5->{
+        \[ \Huge {C = \begin{bmatrix}
+            2 & 2 & 2\\
+            2 & 2 & 2\\
+            2 & 2 & 2
+        \end{bmatrix}, F = \begin{bmatrix}
+            -1 & -1 & -1\\
+            -1 & -1 & -1\\
+            -1 & -1 & -1
+        \end{bmatrix}} \]
+    }
+
+    \begin{itemize}
+        \item<5-> $C$ 上的演化可以对应于 $F$ 上的演化.
+        \item<5-> $F$ 上的演化: 每次把格子变成自己和周围的 $\max$.
+        \item<6-> 稳定态: 所有数稳定到 $F$ 的\textbf{最小值}.
+        \item<7-> 权值: 左上角格子到 $F$ 的一个最小值的\textbf{最短路}.
+    \end{itemize}
+}
+
+
+\frame
+{
+    \frametitle{题解}
+    
+    不妨设 $n\leq m$, 按照列从小到大, 按照顺序一个个填写颜色, 维护轮廓线上 $F$ 的值.
+
+    \onslide<2->{
+    轮廓上的 $F$ 本身的状态, 只需要知道相邻数的差, 状态数为 $O(3^n)$.
+    }
+
+    \onslide<3->{
+        \only<3>{但我们还需要知道左上角距离目前看到的最小值的最短距离, 这个数大小 $O(m)$.}
+        \only<4>{\sout{但我们还需要知道左上角距离目前看到的最小值的最短距离, 这个数大小 $O(m)$.}}
+
+        还需要知道目前轮廓线上最小的数比最小值大多少, 这个数大小 $O(m)$.
+
+        \only<3>{时间复杂度 $O(nm \cdot 3^n m^2)$.}
+        \only<4>{\sout{时间复杂度 $O(nm \cdot 3^n m^2)$.}}
+    }
+
+    \onslide<4->{在更新最小值的时候决策这是不是最后的最小值, 如果是, 那么最短距离最多再多 $n$, 可以据此优化状态,
+    做到时间复杂度 $O(nm \cdot 3^n nm)$.}
+}
