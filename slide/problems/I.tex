@@ -1,33 +1,7 @@
-\documentclass[utf8,usenames,dvipsnames]{beamer}
-\usepackage{latexsym,amssymb,amsmath,amsbsy,amsopn,amstext,extarrows}
-\usepackage{hyperref,graphicx,wrapfig,fancybox}
-\usepackage{xeCJK,pgf}
-\usepackage{color,xcolor}
-\usepackage{ulem}%underline,sout
-\usepackage[thicklines]{cancel}%cancel
-\usepackage{bm}
-\usepackage{array,multicol,multirow}
-\usepackage{diagbox}
-\usepackage{geometry}
-\usepackage{xeCJKfntef}
+\frame
+{
+	\frametitle{I 勿蹖宠物 {by \itshape SpiritualKhorosho}}
 
-\usepackage{tikz}
-\usetikzlibrary{arrows, positioning, quotes}
-
-\author{陈鸿基 / SpiritualKhorosho}
-\title{I 勿蹖宠物}
-\institute{Tsinghua University}
-\usepackage{Tsinghua}
-\begin{document}
-
-\begin{frame}
-	\titlepage
-\end{frame}
-
-\section{简要题意}
-
-\begin{frame}{简要题意}
-	
 	给定 $s_1, \cdots, s_N$，求满足以下条件的下标序列 $i_1, i_2, \cdots, i_k$（$k$ 为任意正整数）的数量，其中 $+$ 表示字符串的连接：
 	\begin{itemize}
 		\item $s_{i_1} + s_{i_2} + \cdots + s_{i_k}$ 是长度为 $L$ 的回文串。
@@ -39,9 +13,7 @@
 		使用样例 3 给出的单词，可以还原出一个有名的英文回文句子，而题目名称是这个句子的中文翻译。除此之外，题目名称的第一个字和第四个字、第二个字和第三个字的拼音（不考虑声调）是相同的。
 	\end{block}
 
-\end{frame}
-
-\section{解法}
+}
 
 \begin{frame}{分析}
 	
@@ -80,17 +52,18 @@
 
 \end{frame}
 
+
 \begin{frame}{做法}
 	
 	记 $f\left(i,q_l, q_r\right)$ 表示当前处理到第 $i$ 位及第 $(L-i+1)$ 位，第 $i$ 位对应正向 Trie 树上的结点 $q_l$，第 $(L-i+1)$ 位对应反向 Trie 树上的结点 $q_r$。转移时枚举第 $(i+1)$ 位及第 $(L-i)$ 位的字母 $\alpha$，如果 $q_l$ 和 $q_r$ 均有 $\alpha$ 的转移边，则相应转移给 $f\left(i+1,q'_l,q'_r\right)$。
 
 	需要注意在 $i=L/2$ 处特判 $q_l$ 和 $q_r$ 能否合并：如果是奇数，则两个结点需要能通过同一个字母走到同一个单词的相同位置；如果是偶数，则有可能两边都恰好走到单词末尾，也有可能为同一个单词的相邻位置。
 
-	\begin{itemize}
-		\item stac\strong{k}/cats
-		\item step/o\strong{n}/\strong{n}o/pets
-		\item n\strong{oo}n
-	\end{itemize}
+	% \begin{itemize}
+	% 	\item stac\strong{k}/cats
+	% 	\item step/o\strong{n}/\strong{n}o/pets
+	% 	\item n\strong{oo}n
+	% \end{itemize}
 
 \end{frame}
 
@@ -112,5 +85,3 @@
 	$$\frac{600-1\times 26}{2} = 287.$$
 
 \end{frame}
-
-\end{document}
